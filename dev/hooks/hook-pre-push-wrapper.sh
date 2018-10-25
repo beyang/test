@@ -29,6 +29,10 @@
 set -euo pipefail
 
 function usage() {
+    if [ "$#" -gt 0 ]; then
+        echo "Failure reason: $1" 1>&2
+    fi
+
     cat <<'EOF'
 Usage: ./hook-pre-push-wrapper.sh $check_script
 
@@ -45,6 +49,7 @@ $check_script should be the path to a script that uses the following environment
 EOF
 
     cat <<EOF
+ARGS: $*
 HUSKY_GIT_PARAMS: $HUSKY_GIT_PARAMS
 HUSKY_GIT_STDIN:
         $HUSKY_GIT_STDIN
@@ -53,30 +58,37 @@ EOF
 }
 
 if [ "$#" -ne 1 ]; then
-    usage
+    usage 'Missing $check_script'
 fi
 check_script="$1"
 
 if [ ! -v HUSKY_GIT_STDIN ] || [ ! -v HUSKY_GIT_PARAMS ]; then
-    usage
+    usage 'Malformed $HUSKY_GIT_PARAMS or $HUSKY_GIT_STDIN'
 fi
 
 
 read -ra git_params <<< "$HUSKY_GIT_PARAMS"
-if [ "${#git_params[@]}" -ne 2 ]; then usage; fi
+if [ "${#git_params[@]}" -ne 2 ]; then usage 'Malformed $HUSKY_GIT_PARAMS'; fi
 
 remote="${git_params[0]}"
 remote_url="${git_params[1]}"
-if [ -z "$remote" ] || [ -z "$remote_url" ]; then usage; fi
+if [ -z "$remote" ] || [ -z "$remote_url" ]; then usage 'Malformed $HUSKY_GIT_PARAMS'; fi
 
 while read -ra line
 do
-    if [ "${#line[@]}" -ne 4 ]; then usage; fi
+    if [ "${#line[@]}" -eq 0 ]; then
+        continue
+    fi
+    if [ "${#line[@]}" -ne 4 ]; then
+        usage 'Malformed $HUSKY_GIT_STDIN';
+    fi
     local_ref="${line[0]}"
     local_sha="${line[1]}"
     remote_ref="${line[2]}"
     remote_sha="${line[3]}"
-    if [ -z "$local_ref" ] || [ -z "$local_sha" ] || [ -z "$remote_ref" ] || [ -z "$remote_sha" ]; then usage; fi
+    if [ -z "$local_ref" ] || [ -z "$local_sha" ] || [ -z "$remote_ref" ] || [ -z "$remote_sha" ]; then
+        usage 'Malformed $HUSKY_GIT_STDIN'
+    fi
 
     remote="$remote" \
           remote_url="$remote_url" \
