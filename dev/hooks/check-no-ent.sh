@@ -15,7 +15,9 @@ function usage() {
 Usage: ./check-no-ent.sh
 
 The following environment variables must be set:
-    TODO
+    $remote
+    $remote_url
+    $local_sha
 EOF
 }
 
@@ -29,14 +31,14 @@ function failCheck() {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
 L!=> DANGER: There is a path "${DISALLOW_PATH}" you are attempting to push
-             to the remote "${remote}" or committing to a branch tracking
-             that remote.
-  
+             to the remote "${remote_url}" or committing to a branch
+             tracking that remote.
+
      Either change the upstream remote or modify the commits to remove the
      "${DISALLOW_PATH}" path.
-  
+
      The output of the following command was non-empty:
-  
+
         git log ${local_sha} -- ${DISALLOW_PATH}
 !                                                                            !
 !!                                                                          !!
