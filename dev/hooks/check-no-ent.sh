@@ -21,28 +21,27 @@ EOF
 
 function failCheck() {
     cat <<EOF
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER   !!
-!!  ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG !!
-!! PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO  !!
-!!   危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险    !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-::                                                                  ::
-''                                                                  ''
-   DANGER: There is a path "${DISALLOW_PATH}" you are attempting
-           to push to the remote "${remote}" or committing to a
-           branch tracking that remote.                             
-                                                                    
-   Either push this change to the enterprise upstream or modify the 
-   commits to remove the ${DISALLOW_PATH} path.                     
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER    !!
+!!  ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG ACHTUNG !!
+!! PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO  !!
+!!   危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险  !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!
+L!=> DANGER: There is a path "${DISALLOW_PATH}" you are attempting to push
+             to the remote "${remote}" or committing to a branch tracking
+             that remote.
   
-   The output of the following command was non-empty:
+     Either change the upstream remote or modify the commits to remove the
+     "${DISALLOW_PATH}" path.
   
-      git log ${local_sha} -- ${DISALLOW_PATH}                      
-
-..                                                                  ..
-::                                                                  ::
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     The output of the following command was non-empty:
+  
+        git log ${local_sha} -- ${DISALLOW_PATH}
+!                                                                            !
+!!                                                                          !!
+!!!!                                                                      !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 EOF
     exit 1
 }
