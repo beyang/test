@@ -1,7 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "bash check-no-enterprise.sh",
-    "post-commit": "bash check-no-enterprise.sh",
-    "pre-push": "bash check-no-enterprise.sh ${HUSKY_GIT_PARAMS} ${HUSKY_GIT_STDIN}"
+    "pre-push": "bash dev/hooks/hook-pre-push-wrapper.sh ./check-no-ent.sh"
   }
 }
