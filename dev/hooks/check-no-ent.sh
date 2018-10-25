@@ -27,16 +27,16 @@ function failCheck() {
 !! PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO PELIGRO  !!
 !!   危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险 危险    !!
 !!                                                                  !!
-!! DANGER: There is a path "${DISALLOW_PATH}" you are attempting    !!
-!!         to push to the remote "${remote}" OR committing to a     !!
-!!         branch tracking that remote.                             !!
-!!                                                                  !!
-!! Either push this change to the enterprise upstream or modify the !!
-!! commits to remove the ${DISALLOW_PATH} path.                     !!
+!! DANGER: There is a path "${DISALLOW_PATH}" you are attempting
+!!         to push to the remote "${remote}" OR committing to a
+!!         branch tracking that remote.                             
+!!                                                                  
+!! Either push this change to the enterprise upstream or modify the 
+!! commits to remove the ${DISALLOW_PATH} path.                     
 !!                                                                  !!
 !! The output of the following command was non-empty:               !!
 !!                                                                  !!
-!!    git log ${local_sha} -- ${DISALLOW_PATH}                      !!
+!!    git log ${local_sha} -- ${DISALLOW_PATH}                      
 !!                                                                  !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 EOF
