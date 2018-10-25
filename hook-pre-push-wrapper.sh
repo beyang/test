@@ -73,5 +73,12 @@ do
     remote_sha="${line[3]}"
     if [ -z "$local_ref" ] || [ -z "$local_sha" ] || [ -z "$remote_ref" ] || [ -z "$remote_sha" ]; then usage; fi
 
-    $check_script
+    remote="$remote" \
+          remote_url="$remote_url" \
+          local_ref="$local_ref" \
+          local_sha="$local_sha" \
+          remote_ref="$remote_ref" \
+          remote_sha="$remote_sha" \
+          $check_script
+
 done <<< "$HUSKY_GIT_STDIN"
