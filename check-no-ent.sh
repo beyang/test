@@ -2,7 +2,8 @@
 
 # Constants
 DISALLOW_PATH=":/enterprise"
-CHECK_REMOTE_SUBSTR="sourcegraph/sourcegraph"
+# TODO
+# CHECK_REMOTE_SUBSTR="sourcegraph/sourcegraph"
 
 set -euo pipefail
 
