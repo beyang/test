@@ -32,6 +32,9 @@ function usage() {
     cat <<'EOF'
 Usage: ./hook-pre-push-wrapper.sh $check_script
 
+The following environment variables must be set (https://github.com/typicode/husky/blob/master/DOCS.md#access-git-params-and-stdin):
+       $HUSKY_GIT_STDIN should be `$remote $remote_url`
+       $HUSKY_GIT_PARAMS should contain lines of the form `$local_ref $local_sha $remote_ref $remote_sha`
 $check_script should be the path to a script that uses the following environment variables:
        $remote
        $remote_url
@@ -39,10 +42,12 @@ $check_script should be the path to a script that uses the following environment
        $local_sha
        $remote_ref
        $remote_sha
+EOF
 
-The following environment variables must be set (https://github.com/typicode/husky/blob/master/DOCS.md#access-git-params-and-stdin):
-       $HUSKY_GIT_STDIN should be `$remote $remote_url`
-       $HUSKY_GIT_PARAMS should contain lines of the form `$local_ref $local_sha $remote_ref $remote_sha`
+    cat <<EOF
+HUSKY_GIT_PARAMS: $HUSKY_GIT_PARAMS
+HUSKY_GIT_STDIN:
+        $HUSKY_GIT_STDIN
 EOF
     exit 1
 }
