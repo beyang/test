@@ -12,10 +12,9 @@ cd "$(git rev-parse --show-toplevel)"
 
 function usage() {
     cat <<'EOF'
-Usage: ./check-no-ent.sh
+Usage: ./check-no-enterprise.sh
 
 The following environment variables must be set:
-    $remote
     $remote_url
     $local_sha
 EOF

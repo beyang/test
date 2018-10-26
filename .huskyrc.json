@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-push": "bash dev/hooks/hook-pre-push-wrapper.sh dev/hooks/check-no-ent.sh"
+    "pre-push": "bash dev/hooks/util/hook-pre-push-wrapper.sh dev/hooks/util/check-no-ent.sh"
   }
 }
