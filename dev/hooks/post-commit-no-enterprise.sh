@@ -13,4 +13,4 @@ function currentRemote() {
     git config --get "remote.${currentRemote}.url"
 }
 
-remote_url="$(currentRemote)" local_sha="$(git rev-parse HEAD)" ./dev/hooks/check-no-enterprise.sh
+remote_url="$(currentRemote)" local_ref="HEAD" local_sha="$(git rev-parse HEAD)" ./dev/hooks/check-no-enterprise.sh

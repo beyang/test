@@ -17,6 +17,7 @@ Usage: ./check-no-enterprise.sh
 The following environment variables must be set:
     $remote_url
     $local_sha
+    $local_ref
 EOF
 }
 
@@ -36,9 +37,10 @@ L!=> DANGER: There is a path "${DISALLOW_PATH}" you are attempting to push
      Either change the upstream remote or modify the commits to remove the
      "${DISALLOW_PATH}" path.
 
-     The output of the following command was non-empty:
+     The output of the following commands was non-empty:
 
         git log ${local_sha} -- ${DISALLOW_PATH}
+        git log ${local_ref} -- ${DISALLOW_PATH}
 !                                                                            !
 !!                                                                          !!
 !!!!                                                                      !!!!
@@ -58,6 +60,10 @@ esac
 
 if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
     exit 0
+fi
+
+if [ ! -z "$(git log ${local_ref} -- ${DISALLOW_PATH})" ]; then
+    failCheck
 fi
 
 if [ ! -z "$(git log ${local_sha} -- ${DISALLOW_PATH})" ]; then
